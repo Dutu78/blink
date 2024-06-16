@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pălpăiri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .box {
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="flaps">Introdu numărul de pălpăiri: </label>
+        <input type="number" id="flaps" min="1" value="1">
+        <br><br>
+        <label>Introdu intervalul: </label>
+        <input type="number" id="interval" min="1" value="500">
+        <br><br>
+        <button onclick="startFlapping()">START</button>
+        <div class="box" id="box">Numărul de pălpăiri va apărea aici</div>
+    </div>
+    <script>
+        const div = document.getElementById('box');
+        function startFlapping() {
+          const numFlaps = document.getElementById('flaps').value; // Obține numărul de pălpăiri introdus
+          if (numFlaps > 0 && !isNaN(numFlaps)) { // Verifică dacă input-ul este un număr valid și diferit de zero
+            let count = 0;
+            let isRed = true;
+            const intervalId = setInterval(function() {
+                if (isRed) {
+                    div.style.backgroundColor = 'blue'; // Change to blue
+                } else {
+                    div.style.backgroundColor = 'red'; // Change to red
+                }
+                count++;
+                box.textContent = count;
+                isRed = !isRed; // Flip the boolean
+                if (count > numFlaps) {
+                    clearInterval(intervalId); // Oprește intervalul
+                    div.style.backgroundColor = 'white';
+                    box.textContent = "Finished!";
+                }
+            }, document.getElementById('interval').value);
+        } else {
+            alert('Te rog introdu un număr valid pentru pălpăiri (mai mare ca 0).');
+        }
+    }
+    </script>
+</body>
+</html>
